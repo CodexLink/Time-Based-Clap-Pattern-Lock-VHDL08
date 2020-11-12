@@ -1,0 +1,174 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Modeltech_pe_edu_10.4a/examples
+Eclap_lock_vhdl
+Z0 w1605205097
+Z1 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z4 dD:/Development-Works/Project-Developments/VHDL_Clap_Lock/src
+Z5 8D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl
+Z6 FD:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl
+l0
+L5
+V<g9m@C0dWIl<]LAVU17021
+!s100 ^mSdl4GKha4ODmzfV2[MK1
+Z7 OP;C;10.4a;61
+33
+Z8 !s110 1605205103
+!i10b 1
+Z9 !s108 1605205103.000000
+Z10 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl|
+Z11 !s107 D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl|
+!i113 1
+Z12 o-work work -2008 -explicit -O0
+Z13 tExplicit 1
+Acl_digital_sim
+R1
+R2
+R3
+Z14 DEx4 work 14 clap_lock_vhdl 0 22 <g9m@C0dWIl<]LAVU17021
+l45
+L44
+VZTb_T2di8N]9bMIKgU=R00
+!s100 aNHLCX9T=;lLA>V?BhE4a0
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Eclap_lock_vhdl_testbench
+Z15 w1605204137
+R1
+R2
+R3
+R4
+Z16 8D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl
+Z17 FD:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl
+l0
+L5
+V7DMIPX[_lC;jn7Pm=bheI1
+!s100 PNK5B8;T3^YeMW^XbA3fc0
+R7
+33
+Z18 !s110 1605205104
+!i10b 1
+Z19 !s108 1605205104.000000
+Z20 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl|
+Z21 !s107 D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl|
+!i113 1
+R12
+R13
+Acl_testbench_siml
+R14
+R1
+R2
+R3
+Z22 DEx4 work 24 clap_lock_vhdl_testbench 0 22 7DMIPX[_lC;jn7Pm=bheI1
+l38
+L8
+Z23 VEG?XN50R`1dQ^;Week5762
+Z24 !s100 HR=mOF`19hMNd?P6h>dZW2
+R7
+33
+R18
+!i10b 1
+R19
+R20
+R21
+!i113 1
+R12
+R13
+Et10_stdlogictb
+Z25 w1605107605
+R2
+R3
+R4
+Z26 8D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/logic.vhd
+Z27 FD:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/logic.vhd
+l0
+L4
+VbZW9^`Z_MEQ3:gE3f_`Ib3
+!s100 A]DDkXj_;l0IPTW[0iQEa2
+R7
+32
+Z28 !s110 1605107612
+!i10b 1
+Z29 !s108 1605107612.000000
+Z30 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/logic.vhd|
+Z31 !s107 D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/logic.vhd|
+!i113 1
+Z32 o-work work -2002 -explicit -O0
+R13
+Asim
+R2
+R3
+DEx4 work 14 t10_stdlogictb 0 22 bZW9^`Z_MEQ3:gE3f_`Ib3
+l13
+L7
+VIAiM9Vh8SmYbGMAVaGlZV1
+!s100 XF1Z9[c0bUPoiL^ZCHT]A0
+R7
+32
+R28
+!i10b 1
+R29
+R30
+R31
+!i113 1
+R32
+R13
+Et15_portmaptb
+Z33 w1605091811
+R1
+R2
+R3
+R4
+R16
+R17
+l0
+L5
+VL2hMSPXmP261eB=[GM:QZ0
+!s100 mR^_@OBGChOE>>TO]^N_D0
+R7
+33
+Z34 !s110 1605091824
+!i10b 1
+Z35 !s108 1605091824.000000
+R20
+R21
+!i113 1
+R12
+R13
+Asim
+DEx4 work 14 clap_lock_vhdl 0 22 3cdHnAcN?eczX]P<@dIG30
+R1
+R2
+R3
+DEx4 work 13 t15_portmaptb 0 22 L2hMSPXmP261eB=[GM:QZ0
+l23
+L8
+V@oVX;l64G@fa@Y463nTR>2
+!s100 0L]QdZ:_[Ikc?f2I^7DKG3
+R7
+33
+R34
+!i10b 1
+R35
+R20
+R21
+!i113 1
+R12
+R13
