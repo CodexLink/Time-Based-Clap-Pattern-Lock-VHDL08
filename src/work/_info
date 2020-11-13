@@ -9,7 +9,7 @@ z2
 cModel Technology
 dC:/Modeltech_pe_edu_10.4a/examples
 Eclap_lock_vhdl
-Z0 w1605205097
+Z0 w1605292137
 Z1 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
 Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
@@ -18,13 +18,13 @@ Z5 8D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.v
 Z6 FD:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl
 l0
 L5
-V<g9m@C0dWIl<]LAVU17021
-!s100 ^mSdl4GKha4ODmzfV2[MK1
+V>JYANC<fWzE>7ZjCH<FZG1
+!s100 R1?4<1H@LhhT:0A4hGVXG3
 Z7 OP;C;10.4a;61
 33
-Z8 !s110 1605205103
+Z8 !s110 1605292139
 !i10b 1
-Z9 !s108 1605205103.000000
+Z9 !s108 1605292139.000000
 Z10 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl|
 Z11 !s107 D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl|
 !i113 1
@@ -34,11 +34,11 @@ Acl_digital_sim
 R1
 R2
 R3
-Z14 DEx4 work 14 clap_lock_vhdl 0 22 <g9m@C0dWIl<]LAVU17021
-l45
-L44
-VZTb_T2di8N]9bMIKgU=R00
-!s100 aNHLCX9T=;lLA>V?BhE4a0
+Z14 DEx4 work 14 clap_lock_vhdl 0 22 >JYANC<fWzE>7ZjCH<FZG1
+l53
+L52
+VXV`_Z@=;HY=VfS>SdhA@B3
+!s100 V7YI7liMGE2o<G42i?kHV1
 R7
 33
 R8
@@ -50,7 +50,7 @@ R11
 R12
 R13
 Eclap_lock_vhdl_testbench
-Z15 w1605204137
+Z15 w1605291857
 R1
 R2
 R3
@@ -63,11 +63,11 @@ V7DMIPX[_lC;jn7Pm=bheI1
 !s100 PNK5B8;T3^YeMW^XbA3fc0
 R7
 33
-Z18 !s110 1605205104
+Z18 !s110 1605292140
 !i10b 1
-Z19 !s108 1605205104.000000
-Z20 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl|
-Z21 !s107 D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl|
+R9
+Z19 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl|
+Z20 !s107 D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl|
 !i113 1
 R12
 R13
@@ -76,41 +76,41 @@ R14
 R1
 R2
 R3
-Z22 DEx4 work 24 clap_lock_vhdl_testbench 0 22 7DMIPX[_lC;jn7Pm=bheI1
-l38
+Z21 DEx4 work 24 clap_lock_vhdl_testbench 0 22 7DMIPX[_lC;jn7Pm=bheI1
+l41
 L8
-Z23 VEG?XN50R`1dQ^;Week5762
-Z24 !s100 HR=mOF`19hMNd?P6h>dZW2
+Z22 V`YjN:@_lWF>k=2^_OiS:<2
+Z23 !s100 gFL`6L]nBFOm_k@GX[7]M2
 R7
 33
 R18
 !i10b 1
+R9
 R19
 R20
-R21
 !i113 1
 R12
 R13
 Et10_stdlogictb
-Z25 w1605107605
+Z24 w1605107605
 R2
 R3
 R4
-Z26 8D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/logic.vhd
-Z27 FD:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/logic.vhd
+Z25 8D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/logic.vhd
+Z26 FD:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/logic.vhd
 l0
 L4
 VbZW9^`Z_MEQ3:gE3f_`Ib3
 !s100 A]DDkXj_;l0IPTW[0iQEa2
 R7
 32
-Z28 !s110 1605107612
+Z27 !s110 1605107612
 !i10b 1
-Z29 !s108 1605107612.000000
-Z30 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/logic.vhd|
-Z31 !s107 D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/logic.vhd|
+Z28 !s108 1605107612.000000
+Z29 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/logic.vhd|
+Z30 !s107 D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/logic.vhd|
 !i113 1
-Z32 o-work work -2002 -explicit -O0
+Z31 o-work work -2002 -explicit -O0
 R13
 Asim
 R2
@@ -122,16 +122,16 @@ VIAiM9Vh8SmYbGMAVaGlZV1
 !s100 XF1Z9[c0bUPoiL^ZCHT]A0
 R7
 32
-R28
+R27
 !i10b 1
+R28
 R29
 R30
-R31
 !i113 1
-R32
+R31
 R13
 Et15_portmaptb
-Z33 w1605091811
+Z32 w1605091811
 R1
 R2
 R3
@@ -144,11 +144,11 @@ VL2hMSPXmP261eB=[GM:QZ0
 !s100 mR^_@OBGChOE>>TO]^N_D0
 R7
 33
-Z34 !s110 1605091824
+Z33 !s110 1605091824
 !i10b 1
-Z35 !s108 1605091824.000000
+Z34 !s108 1605091824.000000
+R19
 R20
-R21
 !i113 1
 R12
 R13
@@ -164,11 +164,11 @@ V@oVX;l64G@fa@Y463nTR>2
 !s100 0L]QdZ:_[Ikc?f2I^7DKG3
 R7
 33
-R34
+R33
 !i10b 1
-R35
+R34
+R19
 R20
-R21
 !i113 1
 R12
 R13
