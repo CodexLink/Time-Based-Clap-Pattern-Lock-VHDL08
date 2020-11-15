@@ -1,6 +1,5 @@
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
-USE IEEE.numeric_std.ALL;
 
 ENTITY CLAP_LOCK_VHDL IS
     GENERIC (
@@ -13,12 +12,17 @@ ENTITY CLAP_LOCK_VHDL IS
 
     );
     PORT (
+        -- Clap Signals Integer State Signals
+        -- More information about these soon because it was looking redundant here.
+        CL_PW_VECTOR_STATE_CODE : OUT INTEGER RANGE 0 TO 2 := 0;
+        CL_PW_CLR_STATE_CODE : OUT INTEGER RANGE 0 TO 5 := 0;
+        CL_PW_STORE_DCT_STATE_CODE : OUT INTEGER RANGE 0 TO 5 := 0;
+        CL_POST_STATE_CODE : OUT INTEGER RANGE 0 TO 1 := 0;
+        CL_TO_UNLCK_LSTN_STATE_CODE : OUT INTEGER RANGE 0 TO 4 := 0;
+        CL_TO_LCK_LSTN_STATE_CODE : OUT INTEGER RANGE 0 TO 3 := 0;
         BTN_RST_SEQUENCER, BTN_DISCARD_CURR_SEQ : IN STD_LOGIC := '0';
 
-        CL_MIC_DTCTR : IN STD_LOGIC := '0'; -- MIC that detects clap.
-        CL_RT_CLK : OUT INTEGER RANGE 0 TO CLAP_WIDTH; -- + 2 because, on + 1, becauase of WHILE Compensation.
-
-        -- These CL status were divided due to One Process, One Signal Drive!
+        -- These CL displays were divided due to One Process, One Signal Drive!
         -- Keep in mind that, the use of Zero-Index is applied here.
         -- This means that instead providing of 5 DOWNTO 0 for a Size of 5.
         -- It was done to 4 DOWNTO 0.
@@ -30,18 +34,14 @@ ENTITY CLAP_LOCK_VHDL IS
         CL_POST_STATE_DISP : OUT STRING (1 TO 3) := "LKD";
         CL_TO_UNLCK_LSTN_STATE_DISP : OUT STRING (1 TO 3) := "RDY";
         CL_TO_LCK_LSTN_STATE_DISP : OUT STRING (1 TO 3) := "RDY";
-        -- Clap Signals Integer State Signals
-        CL_PW_VECTOR_STATE_CODE : OUT INTEGER RANGE 0 TO 2 := 0;
-        CL_PW_CLR_STATE_CODE : OUT INTEGER RANGE 0 TO 5 := 0;
-        CL_PW_STORE_DCT_STATE_CODE : OUT INTEGER RANGE 0 TO 4 := 0;
-        CL_POST_STATE_CODE : OUT INTEGER RANGE 0 TO 1 := 0;
-        CL_TO_UNLCK_LSTN_STATE_CODE : OUT INTEGER RANGE 0 TO 4 := 0;
-        CL_TO_LCK_LSTN_STATE_CODE : OUT INTEGER RANGE 0 TO 3 := 0;
+        -- User Input and LED Indicator of Listening Mode.
+        CL_MIC_DTCTR : IN STD_LOGIC := '0'; -- MIC that detects clap.
+        LED_LSTN_MODE : IN STD_LOGIC := '0'; -- Listening Mode Indicator
+        -- Runtime Indicators.
+        CL_RT_CLK : OUT INTEGER RANGE 0 TO CLAP_WIDTH; -- + 2 because, on + 1, becauase of WHILE Compensation.
+        LED_SEC_BLINK_DISP : IN STD_LOGIC := '0'; -- Time Second Rising Edge Indicator.
         -- Clap Slots (Specifically for Unlocked to Lock Mechanism)
         CL_TO_LCK_CLAP_SLTS : OUT STD_LOGIC_VECTOR (CLAP_CNT_TO_LCK_PH DOWNTO 0) := (OTHERS => '0'); -- Clap Slots for Locking Phase.
-        -- LED Diode Displays
-        LED_SEC_BLINK_DISP : IN STD_LOGIC := '0'; -- Time Second Rising Edge Indicator.
-        LED_LSTN_MODE : IN STD_LOGIC := '0'; -- Listening Mode Indicator
         -- Password Storages
         PW_PTRN_RT : IN STD_LOGIC_VECTOR (CLAP_WIDTH DOWNTO 0) := (OTHERS => '0'); -- Runtime Storage
         PW_PTRN_ST : OUT STD_LOGIC_VECTOR (CLAP_WIDTH DOWNTO 0) := (OTHERS => '0') -- Last Known Storage
@@ -67,26 +67,83 @@ BEGIN
     PROCESS IS
         VARIABLE HAS_NO_PASSWORD : BOOLEAN := FALSE;
         VARIABLE PW_CLAP_COUNT_HANDLER : INTEGER := 0;
+        VARIABLE INIT_FLAG : BOOLEAN := TRUE;
+        VARIABLE ON_BIT_COUNT : INTEGER := 0;
     BEGIN
         -- Pre-requisites:
         -- It waits until :
-        WAIT FOR 500 MS;
+
+        -- On initialization, we run this process.
+        -- After triggering this process, it has to wait for PW_PTRN_ST to change before running it again.
+
+        -- Pre Initialization, Checking of Constraint of Claps Width.
+        -- Checks if CLAP_MIN_LEN_PW and CLAP_MAX_LEN_PW respects CLAP_WIDTH.
+        -- CLAP_MIN_LEN_PW and CLAP_MAX_LEN_PW can have the same value as long as it was not conflicting.
+        -- The use of negative sign is not allowed here!
+
+        IF INIT_FLAG = TRUE THEN
+            IF CLAP_MIN_LEN_PW < 0 THEN
+                REPORT "Minimum Allowed Claps is out of bounds of acceptable range. (Range should be 0 to Positive Number.)" SEVERITY FAILURE;
+                WAIT;
+            END IF;
+
+            IF CLAP_MAX_LEN_PW < 0 THEN
+                REPORT "Maximum Allowed Claps is out of bounds! (Range should be 0 to Positive Number.)" SEVERITY FAILURE;
+                WAIT;
+            END IF;
+
+            IF CLAP_MIN_LEN_PW > CLAP_MAX_LEN_PW THEN
+                REPORT "Minimum Allowed Claps is expected to be lower than CLAP_MAX_LEN_PW! Please check your value assignment before port instantiation!" SEVERITY FAILURE;
+                WAIT;
+            END IF;
+
+            IF CLAP_MIN_LEN_PW > CLAP_WIDTH THEN
+                REPORT "Minimum Allowed Claps weren't respecting the value of CLAP_WIDTH. Please check your value assignment before port instantiation!" SEVERITY FAILURE;
+                WAIT;
+            END IF;
+
+            IF CLAP_MAX_LEN_PW > CLAP_WIDTH THEN
+                REPORT "Maximum Allowed Claps weren't respecting the value of CLAP_WIDTH. Please check your value assignment before port instantiation!" SEVERITY FAILURE;
+                WAIT;
+            END IF;
+
+            WAIT FOR 250 MS;
+            REPORT "Processor #1 | Initialization Started, setting it to False.";
+            INIT_FLAG := FALSE;
+        ELSE
+            REPORT "Processor #1 | After Initialization Phase, On Wait For Next Changes.";
+            WAIT ON PW_PTRN_ST; -- Wait for changes.
+            REPORT "Processor #1 | Changes on Password Pattern Storage Detected!";
+
+        END IF;
 
         -- There will be two loops for initialization!
 
         -- Checks the container if is malformed or has no password.
         -- We don't wanna check by statically declaring a bits of zeros since the width is dynamic.
-        FOR eachIndexST IN 0 TO CLAP_WIDTH LOOP
-            IF PW_PTRN_ST(eachIndexST) = '0' THEN
-                HAS_NO_PASSWORD := TRUE;
-                EXIT;
+        FOR EACH_PW_INDEX IN 0 TO CLAP_WIDTH - 1 LOOP
+            IF PW_PTRN_ST(EACH_PW_INDEX) = '1' THEN
+                ON_BIT_COUNT := ON_BIT_COUNT + 1;
             END IF;
         END LOOP;
 
+        HAS_NO_PASSWORD := TRUE WHEN ON_BIT_COUNT = 0 ELSE
+            FALSE;
+
+        REPORT "It has password? " & BOOLEAN'image(HAS_NO_PASSWORD) & " | Because of ON_BIT_COUNT is " & INTEGER'image(ON_BIT_COUNT);
+
+        ON_BIT_COUNT := 0;
+
         IF HAS_NO_PASSWORD THEN
             CL_PW_VECTOR_STATE_CODE <= 1; --NPW, Sets to No Password State.
+            REPORT "Processor #1 | The system detects no password. Set to NPW state and waiting for resolve.";
+
             -- We wait until it has been resolved.
             WAIT UNTIL CL_PW_STORE_DCT_STATE_CODE = 4;
+            CL_PW_VECTOR_STATE_CODE <= 0;
+            HAS_NO_PASSWORD := FALSE;
+            REPORT "Processor #1 | The system has a password because of state CL_PW_VECTOR_STATE_CODE to 4. Issue Resolved. Ready to Unlock.";
+
         ELSE
 
             -- If it has a password, then check for the password if malformed.
@@ -102,23 +159,32 @@ BEGIN
 
             -- After checking if the length respects CLAP_MIN_LEN_PW and CLAP_MAX_LEN_PW.
             -- It will determines if it was malformed, if it is, then a reset to the password is needed.
-            IF PW_CLAP_COUNT_HANDLER >= CLAP_WIDTH AND PW_CLAP_COUNT_HANDLER <= CLAP_WIDTH THEN
+
+            IF PW_CLAP_COUNT_HANDLER >= CLAP_MIN_LEN_PW AND PW_CLAP_COUNT_HANDLER <= CLAP_MAX_LEN_PW THEN
+                REPORT "All Clear";
                 CL_PW_VECTOR_STATE_CODE <= 0; -- RDY, All Clear.
             ELSE
-                REPORT "Password is Malformed, Resetting Password in 1 Second.";
+                REPORT "Debug | PW_CLAP_COUNT_HANDLER " & INTEGER'image(PW_CLAP_COUNT_HANDLER) & " >= CLAP_MIN_LEN_PW " & INTEGER'image(CLAP_MIN_LEN_PW) & " AND PW_CLAP_COUNT_HANDLER " & INTEGER'image(PW_CLAP_COUNT_HANDLER) & "<= CLAP_MAX_LEN_PW " & INTEGER'image(CLAP_MAX_LEN_PW);
+
+                REPORT "Processor #1 | The system detects that the Password is Malformed, Resetting Password in 1 Second.";
                 CL_PW_VECTOR_STATE_CODE <= 2; -- MPW
 
-                WAIT FOR 1 SEC;
+                WAIT FOR 250 MS;
+
+                WAIT ON PW_PTRN_ST; -- Assumes that it will reset!
+
                 -- In the testbench, you have to clear the password there!
                 -- A seperate process might be nice. But, let's see if that is gonna work.
 
-                FOR EACH_INDEX IN 0 TO CLAP_WIDTH LOOP
-                    PW_PTRN_ST(EACH_INDEX) <= '0';
-                END LOOP;
+                -- FOR EACH_INDEX IN 0 TO CLAP_WIDTH LOOP
+                --     PW_PTRN_ST(EACH_INDEX) <= '0';
+                -- END LOOP;
+
                 CL_PW_VECTOR_STATE_CODE <= 1;
                 REPORT "Password has been reset.";
 
             END IF;
+            PW_CLAP_COUNT_HANDLER := 0;
         END IF;
         WAIT;
 
@@ -221,14 +287,15 @@ BEGIN
     --
     -- These two pre-requisites shouldn't conflict on '1' Value as they should be unique on multiple occasions.
 
-    PROCESS (CL_TO_UNLCK_LSTN_STATE_CODE, CL_TO_LCK_LSTN_STATE_CODE) IS
+    PROCESS IS
     BEGIN
+        WAIT ON CL_TO_UNLCK_LSTN_STATE_CODE, CL_TO_LCK_LSTN_STATE_CODE;
+        REPORT "Validating Password...";
 
-        REPORT "Password Checking Is Here!";
-
-        -- Two Signals on Sensitivity List shouldn't have the same value!
+        -- Two Signals on Wait Statement shouldn't have the same value!
         -- They should contain distinct values with another other to trigger certain signal modifications.
         -- Result of Conflict from Conditionals will only REPORT Not-So-Error Message. (See ELSE Clause Part.)
+
         IF CL_TO_UNLCK_LSTN_STATE_CODE = 2 AND CL_TO_LCK_LSTN_STATE_CODE = 0 THEN
             IF PW_PTRN_RT = PW_PTRN_ST THEN
                 CL_POST_STATE_CODE <= 0;
@@ -328,7 +395,7 @@ BEGIN
 
     -- Internal Component Processor #5 — Reset Password on Storage Mechanism (Has Interrupts)
     -- Password Resetter.
-    -- Description    : Resets Password by Filling Patterns Per Second with Button Instead of Clap.
+    -- Description    : Resets Password by Filling Patterns with Claps Per Second.
 
     -- Notes:
     --  1. This process can be run if only if there's a # of CLAP_MIN_LEN_PW or CLAP_MAX_LEN_PW bits opened.
@@ -350,22 +417,23 @@ BEGIN
         WAIT UNTIL BTN_RST_SEQUENCER = '1'; -- 5. Button must be pressed one time.
         -- Check for Password Integrity
 
-        CL_PW_CLR_STATE_CODE <= 1; -- Allow Proces To Set Password.
+        CL_PW_CLR_STATE_CODE <= 1; -- Allow Process To Set Password to Clear.
+        -- Wait until the LED Listen Mode was turned off on Testbench Code.
+        WAIT UNTIL LED_LSTN_MODE = '0';
 
-        -- Iterate the remaining claps required before processing to Locked Mode.
-        -- The remaining clap slots will iterate even when not detecting the claps.
-        -- This means that the system will disgard it if the clap under constraint intervals did not meet.
-
-        -- This part of the process DOES NOT manipulate the input. Testbench process is required.
-
-        WAIT UNTIL CL_PW_CLR_STATE_CODE = 2; -- We wait for the input before attempt to check more.
+        CL_PW_CLR_STATE_CODE <= 2;
 
         -- Verify The Buttons Sequence (also known as PW_PTRN_RT) with the PW_PTRN_ST.
         IF PW_PTRN_RT = PW_PTRN_ST THEN
+            CL_PW_CLR_STATE_CODE <= 5;
+
             -- We cannot set the password of the storage here!
-            FOR EACH_INDEX IN 0 TO CLAP_WIDTH LOOP
-                PW_PTRN_ST(EACH_INDEX) <= '0';
-            END LOOP;
+            -- The testbench external code can do it.
+            -- FOR EACH_INDEX IN 0 TO CLAP_WIDTH LOOP
+            --     PW_PTRN_ST(EACH_INDEX) <= '0';
+            -- END LOOP;
+
+            -- # !
 
             REPORT "Password Cleared.";
             CL_PW_CLR_STATE_CODE <= 3;
@@ -373,6 +441,7 @@ BEGIN
             REPORT "Invalid To Clear Password.";
             CL_PW_CLR_STATE_CODE <= 2;
         END IF;
+        WAIT FOR 200 MS;
         CL_PW_CLR_STATE_CODE <= 0;
     END PROCESS;
 
@@ -391,36 +460,121 @@ BEGIN
     --  1.  CL_PW_CLR_STATE_CODE turns to 'CPW', Cleared Password State.
     --  2.  CL_PW_VECTOR_STATE_CODE turns to 'NPW', No Password State.
     PROCESS IS
+        VARIABLE BIT_ON_COUNTER : INTEGER := 0;
     BEGIN
 
         WAIT ON CL_PW_CLR_STATE_CODE, CL_PW_VECTOR_STATE_CODE; -- Waits when it was Cleared for Password.
 
-        IF CL_PW_CLR_STATE_CODE = 5 OR CL_PW_VECTOR_STATE_CODE = 1 THEN
-            -- Set to Ready To Listen and wait for Feedback.
-            CL_PW_STORE_DCT_STATE_CODE <= 2;
+        IF CL_PW_CLR_STATE_CODE = 5 OR CL_PW_VECTOR_STATE_CODE = 1 OR CL_PW_VECTOR_STATE_CODE = 2 THEN
 
-            WAIT UNTIL CL_MIC_DTCTR = '1';
+            -- Set to Ready To Listen and wait for Feedback.
+            REPORT "Processor #6 | State of No Password Or Cleared Password Condition Met. Waiting for Feedback...";
+            -- Waits for Testbench To Trigger Signals Required.
             WAIT UNTIL LED_LSTN_MODE = '1';
 
-            WAIT UNTIL CL_PW_STORE_DCT_STATE_CODE = 2;
+            WHILE (CL_PW_STORE_DCT_STATE_CODE /= 4) LOOP
+                CL_PW_STORE_DCT_STATE_CODE <= 1;
+                REPORT "Processor #6 | CL_PW_STORE_DCT_STATE_CODE Has been set to Listen to Claps Mode. Iterating...";
 
-            -- Once we finish the loop, Store the Password on PW_PTRN_ST.
-            -- Keep in mind that the testbench will be the one to clear off PW_PTRN_RT!!!
+                -- Requires with Respect to Claps of Min and Max.
+                FOR ITERATION_INDEX IN 0 TO CLAP_WIDTH - 1 LOOP
+                    -- This statement will cancel and wait for the claps again to record it to the storage.
+                    IF BTN_DISCARD_CURR_SEQ = '1' THEN
+                        REPORT "Processor #6 | Interrupted. Password to Storage Cancelled.";
+                        CL_PW_STORE_DCT_STATE_CODE <= 3;
+                        EXIT;
+                    ELSE
+                        REPORT "Processor #6 | Iteration " & INTEGER'image(ITERATION_INDEX) & " Finished.";
+                        WAIT FOR 1 SEC;
+                    END IF;
+                END LOOP;
 
-            REPORT "Saving New Password...";
-            PW_PTRN_ST <= PW_PTRN_RT;
-            CL_PW_STORE_DCT_STATE_CODE <= 3;
-            REPORT "Password Saved.";
+                -- WAIT UNTIL CL_PW_STORE_DCT_STATE_CODE = 2;
+                -- Once we finish the loop, Store the Password on PW_PTRN_ST.
+                -- Keep in mind that the testbench will be the one to clear off PW_PTRN_RT!!!
 
-            CL_PW_STORE_DCT_STATE_CODE <= 0;
+                IF CL_PW_STORE_DCT_STATE_CODE /= 3 THEN
+                    REPORT "Processor #6 | Checking for CLAP_WIDTH with PW_PTRN_RT (with Respect to CLAP_MIN_LEN_PW and CLAP_MAX_LEN_PW)";
+                    WAIT FOR 10 MS; -- To compensate with the last bit.
 
-            -- REPORT "Setting Values Back To Normal Mode.";
-        ELSE
-            REPORT "Possible Conflict of Condition Signals.";
+                    FOR EACH_BIT_IDX IN 0 TO CLAP_WIDTH LOOP
+                        IF PW_PTRN_RT(EACH_BIT_IDX) = '1' THEN
+                            BIT_ON_COUNTER := BIT_ON_COUNTER + 1;
+                        END IF;
+
+                    END LOOP;
+
+                    IF BTN_DISCARD_CURR_SEQ /= '1' AND BIT_ON_COUNTER >= CLAP_MIN_LEN_PW AND BIT_ON_COUNTER <= CLAP_MAX_LEN_PW THEN
+
+                        CL_PW_STORE_DCT_STATE_CODE <= 4;
+                        REPORT "Processor #6 | Signal Sent to Save the Password.";
+                        EXIT;
+                    ELSE
+                        IF BTN_DISCARD_CURR_SEQ = '1' THEN
+                            REPORT "Processor #6 | Password Input has been interrupted.";
+                            CL_PW_STORE_DCT_STATE_CODE <= 3; -- No need of process to handle PW_PTRN_RT.
+                            WAIT FOR 1 SEC; -- Gives Compensation so that the user has the chance latch it away to avoid infinite loop.
+                            -- Reset States.
+                            BIT_ON_COUNTER := 0;
+                            CL_PW_STORE_DCT_STATE_CODE <= 1; -- No need of process to handle PW_PTRN_RT.
+                        ELSE
+
+                            REPORT "Processor #6 | Password Input were not allowed because its not respecting CLAP_MIN_LEN_PW and CLAP_MAX_LEN_PW Constraints. (" & INTEGER'image(BIT_ON_COUNTER) & ")";
+                            CL_PW_STORE_DCT_STATE_CODE <= 5; -- No need of process to handle PW_PTRN_RT.
+                            WAIT FOR 250 MS;
+                            -- Reset States.
+                            BIT_ON_COUNTER := 0;
+
+                            CL_PW_STORE_DCT_STATE_CODE <= 1; -- No need of process to handle PW_PTRN_RT.
+                        END IF;
+                    END IF;
+                ELSE
+                    NEXT; -- This assume that the value of CL_PW_STORE_DCT_STATE_CODE is 3!
+                END IF;
+                WAIT FOR 250 MS;
+                CL_PW_STORE_DCT_STATE_CODE <= 0; -- No need of process to handle PW_PTRN_RT.
+                -- REPORT "Setting Values Back To Normal Mode.";
+            END LOOP;
+        -- ELSE
+        --     REPORT "Processor #6 | Possible Conflict of Condition Signals. (CL_PW_CLR_STATE_CODE,CL_PW_VECTOR_STATE_CODE) = " & INTEGER'image(CL_PW_CLR_STATE_CODE) & ", " & INTEGER'image(CL_PW_VECTOR_STATE_CODE);
         END IF;
     END PROCESS;
 
-    -- Internal Component Processor #7 | Set of Processes Status Code to Interpretable Status Display (Concurrent Overtime) (No Interrupts)
+    -- HAS ISSUES.
+    PROCESS IS
+        VARIABLE PW_STORED_STATE : BOOLEAN := FALSE;
+        VARIABLE PW_RESET_STATE : BOOLEAN := FALSE;
+    BEGIN
+        -- For Scenario only when user has already set a password and just wants to lock the vault.
+        -- PW_PTRN_ST(1) <= '1';
+        -- PW_PTRN_ST(3) <= '1';
+        -- PW_PTRN_ST(5) <= '1';
+
+        WAIT ON CL_PW_VECTOR_STATE_CODE, CL_PW_CLR_STATE_CODE, CL_PW_STORE_DCT_STATE_CODE;
+
+        -- REPORT INTEGER'image(CL_PW_VECTOR_STATE_CODE) & INTEGER'image(CL_PW_CLR_STATE_CODE) & INTEGER'image(CL_PW_STORE_DCT_STATE_CODE);
+        -- Has issues when it has malformed and can't reset.
+        IF (CL_PW_VECTOR_STATE_CODE = 2 OR CL_PW_CLR_STATE_CODE = 5) AND CL_PW_STORE_DCT_STATE_CODE = 0 AND PW_RESET_STATE = FALSE THEN
+            PW_STORED_STATE := TRUE;
+            PW_RESET_STATE := FALSE;
+            PW_PTRN_ST <= "00000000";
+            FOR EACH_PW_INDEX IN 0 TO CLAP_WIDTH LOOP
+                PW_PTRN_ST(EACH_PW_INDEX) <= '0';
+                REPORT STD_LOGIC'image(PW_PTRN_ST(EACH_PW_INDEX));
+            END LOOP;
+            -- PW_PTRN_ST <= PW_PTRN_RT;
+            REPORT "Extern | Storage Password was Reset to Default (All Zeros).";
+
+            -- Unclear.
+        ELSIF CL_PW_STORE_DCT_STATE_CODE = 4 AND (CL_PW_VECTOR_STATE_CODE = 0 AND CL_PW_CLR_STATE_CODE = 0) AND PW_STORED_STATE = FALSE THEN
+            PW_PTRN_ST <= PW_PTRN_RT;
+            PW_STORED_STATE := TRUE;
+            PW_RESET_STATE := FALSE;
+            REPORT "Extern | Storage Password was Saved.";
+        END IF;
+    END PROCESS;
+
+    -- Internal Component Processor #8 | Set of Processes Status Code to Interpretable Status Display (Concurrent Overtime) (No Interrupts)
     -- Set of Process Async.
     -- This is the process that outputs rhe status of the system to a Seven Segment or an LCD Display in Status Abbreviation Form.
     -- Current List of Known Values for Each Processes.
@@ -438,13 +592,14 @@ BEGIN
     --          2. CL_PW_STORE_DCT_DISP <= 'PRC'; -- Processing Claps.
     --          3. CL_PW_STORE_DCT_DISP <= 'IPR'; -- Interrupted Process. — BTN_DISCARD_CURR_SEQ
     --          4. CL_PW_STORE_DCT_DISP <= 'PWS'; -- Password Stored.
+    --          5. CL_PW_STORE_DCT_DISP <= 'CNM'; -- Constraints Not Met.
 
     --      Password Clearing Phase + 1 (CL_PW_CLR_STATE_CODE)
-    --          1. CL_PW_CLR_STATE_DISP <= 'CPW'; -- Inputting Password.
+    --          1. CL_PW_CLR_STATE_DISP <= 'IPW'; -- Inputting Password.
     --          2. CL_PW_CLR_STATE_DISP <= 'CBS'; -- Checking Button Sequence.
     --          3. CL_PW_CLR_STATE_DISP <= 'CPW'; -- Process Interrupted.
     --          4. CL_PW_CLR_STATE_DISP <= 'ICP'; -- Invalid To Clear Password.
-    --          5. CL_PW_CLR_STATE_DISP <= 'CPW'; -- Cleared Password.
+    --          5. CL_PW_CLR_STATE_DISP <= 'CLR'; -- Cleared Password.
 
     --      Post-State of Clap Lock (After Multiple Statement Displays) Default. (CL_POST_STATE_CODE)
     --          0. CL_POST_STATE_DISP <= 'ULK'; -- Unlocked Mode.
@@ -488,6 +643,8 @@ BEGIN
                 CL_PW_STORE_DCT_DISP <= "IPR";
             WHEN 4 =>
                 CL_PW_STORE_DCT_DISP <= "PWS";
+            WHEN 5 =>
+                CL_PW_STORE_DCT_DISP <= "CNM";
             WHEN OTHERS =>
                 CL_PW_STORE_DCT_DISP <= "NKN";
         END CASE;
@@ -497,15 +654,17 @@ BEGIN
     BEGIN
         CASE CL_PW_CLR_STATE_CODE IS
             WHEN 0 =>
-                CL_PW_CLR_STATE_DISP <= "CPW";
+                CL_PW_CLR_STATE_DISP <= "RDY";
             WHEN 1 =>
-                CL_PW_CLR_STATE_DISP <= "CBS";
+                CL_PW_CLR_STATE_DISP <= "IPW";
             WHEN 2 =>
+                CL_PW_CLR_STATE_DISP <= "CBS";
+            WHEN 3 =>
                 CL_PW_CLR_STATE_DISP <= "CPW";
             WHEN 4 =>
                 CL_PW_CLR_STATE_DISP <= "ICP";
             WHEN 5 =>
-                CL_PW_CLR_STATE_DISP <= "CPW";
+                CL_PW_CLR_STATE_DISP <= "CLR";
             WHEN OTHERS =>
                 CL_PW_CLR_STATE_DISP <= "NKN";
         END CASE;
