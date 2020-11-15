@@ -9,7 +9,7 @@ z2
 cModel Technology
 dC:/Modeltech_pe_edu_10.4a/examples
 Eclap_lock_vhdl
-Z0 w1605379428
+Z0 w1605444698
 Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z2 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
 Z3 dD:/Development-Works/Project-Developments/VHDL_Clap_Lock/src
@@ -17,13 +17,13 @@ Z4 8D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.v
 Z5 FD:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl
 l0
 L4
-V0P<UnZjn10Hze4=^QDzjL2
-!s100 Db1F_OKzXhREzJDA8edV:1
+VJ1gzMI1zKhBTo7=e5UZU70
+!s100 RS^`2SSg?UzILzcTBHZkT3
 Z6 OP;C;10.4a;61
 33
-Z7 !s110 1605410405
+Z7 !s110 1605445025
 !i10b 1
-Z8 !s108 1605410405.000000
+Z8 !s108 1605445025.000000
 Z9 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl|
 Z10 !s107 D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl|
 !i113 1
@@ -32,11 +32,11 @@ Z12 tExplicit 1
 Acl_digital_sim
 R1
 R2
-Z13 DEx4 work 14 clap_lock_vhdl 0 22 0P<UnZjn10Hze4=^QDzjL2
-l53
-L52
-VN[mfQaE5NoAHAEQojVM<R0
-!s100 e76A2R=K:;5[Q6U101nam3
+Z13 DEx4 work 14 clap_lock_vhdl 0 22 J1gzMI1zKhBTo7=e5UZU70
+l54
+L53
+VJ@7K]`X9GFW^WLaGailP[2
+!s100 6Q0NCQJc^QezYmW6L?R0d3
 R6
 33
 R7
@@ -48,7 +48,7 @@ R10
 R11
 R12
 Eclap_lock_vhdl_testbench
-Z14 w1605379447
+Z14 w1605444845
 R1
 R2
 R3
@@ -75,8 +75,8 @@ R2
 Z19 DEx4 work 24 clap_lock_vhdl_testbench 0 22 BO2<<8R>`l66^LS7hjVNN3
 l40
 L7
-Z20 VVLB30zoC?iKcL5GGOi5n_2
-Z21 !s100 Q1f2<iXXZ_Qo]Z_iDFJAk2
+Z20 V1FKQ7XHR[1XJWzRb__K`51
+Z21 !s100 [A`al;31J907bF9ciFP8Z2
 R6
 33
 R7

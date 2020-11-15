@@ -1,4 +1,5 @@
 # VHDL_Clap_Lock
+
 Clap Lock Mechanism in Lower-Level Machine Implementation | A 4-Member Team VHDL Project in CPE 016 — Introduction to VHDL
 
 
@@ -14,4 +15,5 @@ I promise to have it finished before doing any other projects.
 - Make Type to Remove CL_XX_XX_XX_CODE and retain only CL_XX_XX_XX_DISP.
 - Attempt to consolidate redundant iterations to one processor.
 - Implement Max With CLAP_WIDTH of 8. (Because we are in 8-bit.) Requires investigation.
-- Create Unittests that breaks down the test bench's functionality (from demo).
+- Create Unittests that breaks down the test bench's functionality (from the demo).
+- Implement Timer Display for the sake of knowning the nth second for nth pattern.
