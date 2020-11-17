@@ -2032,7 +2032,7 @@ suppress = 8780 ;an explanation can be had by running: verror 8780
 ;            can result in a corrupt MPF file.  All project properties
 ;            can be modified through project window dialogs.
 Project_Version = 6
-Project_DefaultLib = cl_lib
+Project_DefaultLib = work
 Project_SortMethod = unused
 Project_Files_Count = 2
 Project_File_0 = D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl

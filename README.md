@@ -65,7 +65,7 @@ To Fork:
 
 ### 📂 Project Setup
 
-In this part of the subsection, I'm only going to introduce the setup part in Simulation which is ModelSim. If you have other simulators, please keep in note that you have set the Compiler to VHDL08 Compiler. The default compiler which is VHDL92 does not allow to display output of the signals.
+In this part of the subsection, I'm only going to introduce the setup part in Simulation which is ModelSim. If you have other simulators, please keep in note that you have set the Compiler to **VHDL08** Compiler. The default compiler which is **VHDL92** does not allow to display output of the signals.
 
 Display Some Images here.
 
