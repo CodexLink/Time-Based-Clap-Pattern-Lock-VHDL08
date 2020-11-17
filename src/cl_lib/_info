@@ -1,0 +1,89 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Modeltech_pe_edu_10.4a/examples
+Eclap_lock_vhdl
+Z0 w1605501810
+Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z2 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z3 dD:/Development-Works/Project-Developments/VHDL_Clap_Lock/src
+Z4 8D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl
+Z5 FD:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl
+l0
+L4
+VKMgz?mmXFE?4`@U1VY[Zh1
+!s100 ?o083gAAYa;bEg^KZe8`R3
+Z6 OP;C;10.4a;61
+33
+Z7 !s110 1605592996
+!i10b 1
+Z8 !s108 1605592996.000000
+Z9 !s90 -reportprogress|300|-work|cl_lib|-2008|-explicit|-stats=none|D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl|
+Z10 !s107 D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_VHDL_CMPNT.vhdl|
+!i113 1
+Z11 o-work cl_lib -2008 -explicit -O0
+Z12 tExplicit 1
+Acl_digital_sim
+R1
+R2
+Z13 DEx4 work 14 clap_lock_vhdl 0 22 KMgz?mmXFE?4`@U1VY[Zh1
+l54
+L53
+Z14 VkCKLV13EXSV:6UUH3af2X3
+Z15 !s100 LFWN];bf:Adiza34bfjNM0
+R6
+33
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Eclap_lock_vhdl_testbench
+Z16 w1605592993
+R1
+R2
+R3
+Z17 8D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl
+Z18 FD:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl
+l0
+L4
+VV8LNQ;A87fYOR9VLRT==41
+!s100 7a_JZiTRnLbLCC7lhA^gW0
+R6
+33
+R7
+!i10b 1
+R8
+Z19 !s90 -reportprogress|300|-work|cl_lib|-2008|-explicit|-stats=none|D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl|
+Z20 !s107 D:/Development-Works/Project-Developments/VHDL_Clap_Lock/src/CL_TESTBENCH.vhdl|
+!i113 1
+R11
+R12
+Acl_testbench_siml
+R13
+R1
+R2
+DEx4 work 24 clap_lock_vhdl_testbench 0 22 V8LNQ;A87fYOR9VLRT==41
+l40
+L7
+VUVg>271UH2S^C2IV=J2Jz0
+!s100 m:imf^Ufo?jK_G7_NgDkd3
+R6
+33
+R7
+!i10b 1
+R8
+R19
+R20
+!i113 1
+R11
+R12

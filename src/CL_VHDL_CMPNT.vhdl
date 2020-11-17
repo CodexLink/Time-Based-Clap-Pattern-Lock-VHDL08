@@ -503,7 +503,6 @@ BEGIN
     -- Password Modification to PW_PTRN_ST has been found on two processes.
     -- It's to play under each processes state and do modifications.
 
-    -- HAS ISSUES.
     PROCESS IS
         VARIABLE PW_STORED_STATE : BOOLEAN := FALSE;
         VARIABLE PW_RESET_STATE : BOOLEAN := FALSE;
@@ -538,7 +537,7 @@ BEGIN
     END PROCESS;
 
     -- Internal Component Processor #8 | Set of Processes Status Code to Interpretable Status Display (Concurrent Overtime) (No Interrupts)
-    -- Set of Process Async.
+    -- Set of Process Converter from Status Code to Status Display Abbreviation.
     -- This is the process that outputs rhe status of the system to a Seven Segment or an LCD Display in Status Abbreviation Form.
     -- Current List of Known Values for Each Processes.
 

@@ -170,6 +170,7 @@ BEGIN
                 LED_SEC_BLINK_DISP <= '0';
                 PW_PTRN_RT <= "00000000";
             END LOOP;
+
             -- Keep note that, after iteration, the PW_PTRN_RT should be reset here!
             -- The module cannot modify it since PW_PTRN_RT is in IN mode. INOUT cannot do
 
