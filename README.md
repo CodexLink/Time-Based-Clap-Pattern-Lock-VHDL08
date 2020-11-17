@@ -1,7 +1,7 @@
 <h1 align="center">Time-Based Clap-Pattern Lock</h1>
-<h4 align="center">A Time-Based Clap Lock Mechanism in Lower-Level Machine Implementation
+<h4 align="center">A Time-Based Clap Lock Mechanism in Lower-Level Machine Implementation.</h4>
 
-Created by 4-Member Team VHDL Project in CPE 016 — Introduction to VHDL | Implemented in VHDL 2008.</h4>
+<h4 align="center">Created by 4-Member Team VHDL Project in CPE 016 — Introduction to VHDL | Implemented in VHDL 2008.</h4>
 
 <div align="center">
 
@@ -118,4 +118,4 @@ Here are the list of authors who is still taking part of the project.
 
 ## 📚 License
 
-This project is licensed under the **MIT License**, see the [LICENSE.md](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/master/LICENSE) file for details
+This project is licensed under the **MIT License**, see the [LICENSE.md](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/master/LICENSE) file for more information.
