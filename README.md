@@ -3,6 +3,8 @@
 
 <h4 align="center">Created by 4-Member Team VHDL Project in CPE 016 — Introduction to VHDL | Implemented in VHDL 2008.</h4>
 
+![Screenshot](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/overall-tests.png)
+
 <div align="center">
 
 <!-- [![CodeFactor](https://www.codefactor.io/repository/github/codexlink/tasktoremindme/badge)](https://www.codefactor.io/repository/github/codexlink/tasktoremindme)
