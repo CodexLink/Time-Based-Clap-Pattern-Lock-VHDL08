@@ -3,8 +3,6 @@
 
 <h4 align="center">Created by 4-Member Team VHDL Project in CPE 016 — Introduction to VHDL | Implemented in VHDL 2008.</h4>
 
-![Screenshot](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/overall-tests.png)
-
 <div align="center">
 
 <!-- [![CodeFactor](https://www.codefactor.io/repository/github/codexlink/tasktoremindme/badge)](https://www.codefactor.io/repository/github/codexlink/tasktoremindme)
@@ -26,10 +24,6 @@ Also, keep in mind that, the implementation on this branch is heavily confusing 
 
 And last, but not the least, expect it to be really confusing but it **works**. We made this project in time interval of **3 DAYS**.
 
-## 🔖 Table of Contents
-
-The following set of links are the subsections of the remaining parts of this README. Please check the following below for fast tracking to particular subsection.
-
 ## 🚦 Getting Started
 
 In this part of the README, you will learn how to setup from cloning / forking the repository to the simulation process.
@@ -50,26 +44,46 @@ If you're using **Visual Studio Code**, here's a list of extensions that I used 
 
 ### 💻 Repository Setup
 
-In this part, I assume that you have the materials / software installed and properly configured. To start off, you have **two ways** to get this project. You go by (1) **Cloning** or (2) **Forking**.
+In this part, I assume that you have the materials / software installed and properly configured. To start off, you have **two ways** to get this project. By (1) **Cloning** or (2) **Forking**.
 
 #### What's the difference???
 
 1. **Cloning** — You replicate the project for your local usage. You do not however inherit the project (unless you're a contributer here) and you don't have the capability to generate PRs to issue with the original repo.
 1. **Forking** — You are able to replicate the project and at the same time, you were able to get inheritance of the project. You're allowed to make changes, reflect into your account, and create PR to the original repo.
 
-To Clone:
-
-> "Media Here"
-
-To Fork:
-
-> "Media Here"
-
 ### 📂 Project Setup
 
 In this part of the subsection, I'm only going to introduce the setup part in Simulation which is ModelSim. If you have other simulators, please keep in note that you have set the Compiler to **VHDL08** Compiler. The default compiler which is **VHDL92** does not allow to display output of the signals.
 
-Display Some Images here.
+![Compiler Options](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/compiler-options.png)
+
+***Keep in mind that, you have to set the compiler options from both files. (This is ModelSim Use-Case.)***
+
+After setting up the compiler from both files and compiled them. You have to Start the Simulation from **(1) clap_lock_vhdl_testbench** and **(2) Add Waveform** to it.
+
+| (1) | (2) |
+| ----------- | ----------- |
+|
+
+![Simulation Choices](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/simulation_to_choose.png) | ![Adding Waveform to Simulation](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/adding_waveform.png)
+
+ |
+
+Once you were able to set those, its time to adjust the runtime length.
+
+![Runtime Adjustment](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/runtime-adjustment.png)
+
+*This was done so that, there's a time interval of 1 second per each **run** command being executed.*
+
+And last but not the least, fill in the waveform objects. There are only few selected objects that has to be looked at as other objects weren't useful at all.
+
+![Objects on Waveform](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/objects-on-waveform.png)
+
+Once you hit the **run** command in the transcript, you have to keep going until you have the following waveform.
+
+![Runtime Expectation Simulation](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/overall-tests.png)
+
+**The setup is completed! If you want to know more about the runtime of each waveform for every second it runs, please check the documentation**
 
 ## 🎆 Post-Work: Result, Demo, Introduction
 
