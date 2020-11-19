@@ -99,7 +99,7 @@ I, the maintainer, have listed the things that I could have done but decided to 
 ***I promise to have it finished before this year.***
 
 * Separate **PW_PTRN_RT** from Testbench to Module File with INOUT Port Mode.
-* Make LED Turn ON (via Process) in Module instead of Testbench, whenever CL_MIC_DTCTR is on.
+* Make **LED Turn ON** (via Process) in Module instead of Testbench, whenever **CL_MIC_DTCTR** is on.
 * Make **LED_SEC_BLINK_DISP** blink according to changes on **CL_RT_CLK**.
 * Make Type to Remove **CL_XX_XX_XX_CODE** and retain only **CL_XX_XX_XX_DISP**.
 * Attempt to consolidate redundant iterations to one processor.
@@ -109,7 +109,9 @@ I, the maintainer, have listed the things that I could have done but decided to 
 
 ## Contributing
 
-In this branch, I won't allow making changes. I will make changes to "", so check that branch for more information for contributing.
+In this branch, I won't be making changes. I will make changes to ***POSTWORK_REWRITE_PATCH***, so checkout that branch for more information for contributing.
+
+Keep in mind that, the future branch will be directed to the branch called ***POSTWORK_REWRITE_PATCH***. This branch that you're currently checked out ***LEGACY_WORK*** will be retained for concept compatibility.
 
 ## Versioning
 
