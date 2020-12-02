@@ -55,7 +55,7 @@ In this part, I assume that you have the materials / software installed and prop
 
 In this part of the subsection, I'm only going to introduce the setup part in Simulation which is ModelSim. If you have other simulators, please keep in note that you have set the Compiler to **VHDL08** Compiler. The default compiler which is **VHDL92** does not allow to display output of the signals.
 
-![Compiler Options](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/compiler-options.png)
+![Compiler Options](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/LEGACY_WORK/imgs/compiler-options.png)
 
 ***Keep in mind that, you have to set the compiler options from both files. (This is ModelSim Use-Case.)***
 
@@ -63,22 +63,22 @@ After setting up the compiler from both files and compiled them. You have to Sta
 
 | (1) | (2) |
 | ----------- | ----------- |
-| ![Simulation Choices](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/simulation_to_choose.png) | ![Adding Waveform to Simulation](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/adding_waveform.png) |
+| ![Simulation Choices](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/LEGACY_WORK/imgs/simulation_to_choose.png) | ![Adding Waveform to Simulation](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/LEGACY_WORK/imgs/adding_waveform.png) |
 
 
 Once you were able to set those, its time to adjust the runtime length.
 
-![Runtime Adjustment](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/runtime-adjustment.png)
+![Runtime Adjustment](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/LEGACY_WORK/imgs/runtime-adjustment.png)
 
 *This was done so that, there's a time interval of 1 second per each **run** command being executed.*
 
 And last but not the least, fill in the waveform objects. There are only few selected objects that has to be looked at as other objects weren't useful at all.
 
-![Objects on Waveform](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/objects-on-waveform.png)
+![Objects on Waveform](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/LEGACY_WORK/imgs/objects-on-waveform.png)
 
 Once you hit the **run** command in the transcript, you have to keep going until you have the following waveform.
 
-![Runtime Expectation Simulation](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/main/imgs/overall-tests.png)
+![Runtime Expectation Simulation](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/LEGACY_WORK/imgs/overall-tests.png)
 
 **The setup is completed! If you want to know more about the runtime of each waveform for every second it runs, please check the documentation. Thanks!**
 
