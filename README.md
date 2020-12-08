@@ -1,7 +1,7 @@
 <h1 align="center">Time-Based Clap-Pattern Lock</h1>
 <h4 align="center">A Time-Based Clap Lock Mechanism in Lower-Level Machine Implementation.</h4>
 
-<h4 align="center">Created by 4-Member Team VHDL Project in CPE 016 — Introduction to VHDL | Implemented in VHDL 2008.</h4>
+<h4 align="center">Created by a 4-Member Team VHDL Project in CPE 016 — Introduction to VHDL | Implemented in VHDL 2008.</h4>
 
 <div align="center">
 
@@ -20,7 +20,7 @@ Hello! This is a repository dedicated to show the concept and the implementation
 
 The repository is **free-of-charge** and is under [MIT License](https://github.com/CodexLink/Time-Based_Clap-Pattern-Lock_VHDL08/blob/master/LICENSE), so you can fork and make changes without me being notified about it.
 
-Also, keep in mind that, the implementation on this branch is heavily confusing because of how VHDL handles signals and how they make it hardly as possible to drive certain things and other such. Another branch will be made called ***""*** to assess proper implementation and implement all the things that are in the To-Do List.
+Also, keep in mind that, the implementation on this branch is heavily confusing because of how VHDL handles signals and how they make it hard as possible to drive certain signals and things and other such. I'm not sure if I wanna **rewrite** it, because of the convienience of the IDE such as `ModelSim` is **not so great after all**.
 
 And last, but not the least, expect it to be really confusing but it **works**. We made this project in time interval of **3 DAYS**.
 
@@ -109,18 +109,13 @@ I, the maintainer, have listed the things that I could have done but decided to 
 
 ## Contributing
 
-In this branch, I won't be making changes. I will make changes to ***POSTWORK_REWRITE_PATCH***, so checkout that branch for more information for contributing.
+I won't be making such changes (unless if I wanted to in unknown times) in the future because its hard to work with the project. Though I wanna rewrite it as possible but its best to have other things to do than this one, occasionally.
 
-Keep in mind that, the future branch will be directed to the branch called ***POSTWORK_REWRITE_PATCH***. This branch that you're currently checked out ***LEGACY_WORK*** will be retained for concept compatibility.
+If you're interested on working on this project, please feel free to do it and I'm glad to have someone else to take interest of it. Remember that this is only a concept, but there would still be a room for a change.
 
 ## Versioning
 
-I don't use any software versioning yet. But instead I usually do using time and date in 24H format, in short, datestamp. For example:
-
-``` text
-When Build is done: at 4:51 PM at 08/21/2018
-Result Versioning is: (PostWork|Initial).082118
-```
+Currently, I haven't used any software versioning on this project, just like Semantic Versioning. I won't be doing because it took me 3 days to realize I should've dooe so. 
 
 ## 🏆 ✍ Authors
 
